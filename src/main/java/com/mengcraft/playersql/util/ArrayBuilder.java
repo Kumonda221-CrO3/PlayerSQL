@@ -8,36 +8,35 @@ public class ArrayBuilder<T> {
     private Object[] array;
     private int cursor;
 
-    public ArrayBuilder() {
+    public ArrayBuilder() 
+    {
         array = new Object[] {};
     }
 
     public void append(T value) {
-        if (cursor >= array.length) {
+        if (cursor >= array.length) 
             growArray();
-        }
         array[cursor++] = value;
     }
 
     @SuppressWarnings("unchecked")
-    public T[] build(Class<T> type) {
+    public T[] build(Class<T> type) 
+    {
         Object[] output = (Object[]) Array.newInstance(type, cursor);
-        while (cursor != 0) {
+        while (cursor != 0)
             output[--cursor] = array[cursor];
-        }
         return (T[]) output;
     }
 
-    private void growArray() {
+    private void growArray() 
+    {
         final Object[] bigger;
-        if (array.length < 1) {
+        if (array.length < 1)
             bigger = new Object[SIZE_DEFAULT];
-        } else {
+        else
             bigger = new Object[array.length * 2];
-        }
-        for (int i = 0; i != array.length;) {
+        for (int i = 0; i != array.length;) 
             bigger[i] = array[i++];
-        }
         this.array = bigger;
     }
 
